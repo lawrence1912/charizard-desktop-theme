@@ -5,13 +5,11 @@
 > 预览：`charizard-desk`（终端同款配色）+ App 自带原生磨砂玻璃，暗色外观，13px JetBrains Mono。
 > 截图里的会话列表已做遮挡，不包含任何真实对话内容。
 
-给 Hermes Desktop 用的**桌面专属**主题（不会改动 CLI/TUI 的 skin）。包含三套：
+给 Hermes Desktop 用的**桌面专属**主题（不会改动 CLI/TUI 的 skin）。只有一套：
 
 | 主题 | 说明 |
 |---|---|
 | `charizard-desk` 火山炭焰 | 终端同款观感：#282a33 底 + 奶油白 #FFFFD7 正文 + 琥珀橙 #FFAF5F，暖色气泡 |
-| `graphite-soft` 石墨柔光 | 冷调深灰（GitHub Dark Dimmed 系），不刺眼、非纯黑 |
-| `paper-soft` 奶白纸感 | 暖白纸底（Rosé Pine Dawn 系），非纯白 |
 
 ## 安装
 
@@ -52,7 +50,7 @@ $HERMES_HOME/desktop-plugins/charizard-desktop-theme/
 
 ## 使用
 
-- 设置 → 外观 → 主题（列表里会多出上面三套）
+- 设置 → 外观 → 主题（列表里会多出「火山炭焰 Charizard」）
 - 或 ⌘K 搜"主题" → 「主题：火山炭焰 Charizard」一键切换
 - 主题按 profile 保存；只想删掉：设置 → 插件 里关掉，或删除该文件夹
 

@@ -1,10 +1,8 @@
 /**
  * 火山炭焰 Charizard — Hermes Desktop 桌面主题包（桌面专属，不影响 CLI/TUI 的 skin）
  *
- * 三套主题：
+ * 只有一套主题：
  *   - charizard-desk 火山炭焰：终端同款（#282a33 底 + 奶油白 #FFFFD7 + 琥珀橙 #FFAF5F）
- *   - graphite-soft  石墨柔光：冷调深灰（GitHub Dark Dimmed 系）
- *   - paper-soft     奶白纸感：暖白纸底（Rosé Pine Dawn 系），非纯白
  *
  * ⚠️ 表面色都是"反推值"：桌面端不会照抄主题里的 background/card/popover/userBubble，
  * 而是先跟近黑混一遍再画（暗色：chrome = 74% background + 26% #0d0d0e；editor = 38% card
@@ -15,62 +13,6 @@
  */
 
 import { THEMES_AREA, PALETTE_AREA, host, requestTheme } from '@hermes/plugin-sdk'
-const graphiteSoft = {
-  name: 'graphite-soft',
-  label: '石墨柔光 Graphite Soft',
-  description: '柔和深灰 · 桌面专属（不刺眼、非纯黑）',
-  colors: {
-    background: '#293039',        // 反推值：渲染后 = #22272e（应用会把底色混暗 26%）
-    foreground: '#cdd9e5',
-    card: '#536274',              // 渲染后 #2d333b
-    cardForeground: '#cdd9e5',
-    muted: '#2d333b',
-    mutedForeground: '#8b98a5',
-    popover: '#485564',           // 渲染后 #2d333b
-    popoverForeground: '#dbe4ec',
-    primary: '#539bf5',
-    primaryForeground: '#1c2128',
-    secondary: '#373e47',
-    secondaryForeground: '#cdd9e5',
-    accent: '#373e47',
-    accentForeground: '#cdd9e5',
-    border: '#444c56',
-    input: '#2d333b',
-    ring: '#539bf5',
-    midground: '#539bf5',
-    midgroundForeground: '#1c2128',
-    composerRing: '#539bf5',
-    destructive: '#e5534b',
-    destructiveForeground: '#ffffff',
-    sidebarBackground: '#1c2128',
-    sidebarBorder: '#373e47',
-    userBubble: '#485564',        // 渲染后 #2d333b
-    userBubbleBorder: '#444c56'
-  },
-  terminal: {
-    foreground: '#cdd9e5',
-    cursor: '#539bf5',
-    black: '#545d68',
-    red: '#f47067',
-    green: '#57ab5a',
-    yellow: '#c69026',
-    blue: '#539bf5',
-    magenta: '#b083f0',
-    cyan: '#39c5cf',
-    white: '#909dab',
-    brightBlack: '#636e7b',
-    brightRed: '#ff938a',
-    brightGreen: '#6bc46d',
-    brightYellow: '#daaa3f',
-    brightBlue: '#6cb6ff',
-    brightMagenta: '#dcbdfb',
-    brightCyan: '#56d4dd',
-    brightWhite: '#cdd9e5'
-  }
-}
-graphiteSoft.darkColors = { ...graphiteSoft.colors }
-graphiteSoft.darkTerminal = { ...graphiteSoft.terminal }
-
 // 与终端 1:1 同色的 charizard 版：颜色取自 charizard skin（banner_text #FFF0D4 / banner_accent
 // #F29C38 / banner_dim #C58A45），表面色按应用的混色公式反推 —— 渲染结果 = 终端底色 #282c34。
 const charizardDesk = {
@@ -129,63 +71,7 @@ const charizardDesk = {
 charizardDesk.darkColors = { ...charizardDesk.colors }
 charizardDesk.darkTerminal = { ...charizardDesk.terminal }
 
-const paperSoft = {
-  name: 'paper-soft',
-  label: '奶白纸感 Paper Soft',
-  description: '暖白纸底 · 桌面专属（不晃眼、非纯白）',
-  colors: {
-    background: '#faf4ed',
-    foreground: '#575279',
-    card: '#fffaf3',
-    cardForeground: '#575279',
-    muted: '#f2e9e1',
-    mutedForeground: '#6f6a87',
-    popover: '#fffaf3',
-    popoverForeground: '#575279',
-    primary: '#286983',
-    primaryForeground: '#faf4ed',
-    secondary: '#f2e9e1',
-    secondaryForeground: '#575279',
-    accent: '#f4ede8',
-    accentForeground: '#575279',
-    border: '#dfdad9',
-    input: '#fffaf3',
-    ring: '#286983',
-    midground: '#286983',
-    midgroundForeground: '#faf4ed',
-    composerRing: '#286983',
-    destructive: '#a4526a',
-    destructiveForeground: '#fffaf3',
-    sidebarBackground: '#f2e9e1',
-    sidebarBorder: '#dfdad9',
-    userBubble: '#f4ede8',
-    userBubbleBorder: '#e0d8d2'
-  },
-  terminal: {
-    foreground: '#1f2328',
-    cursor: '#286983',
-    black: '#24292f',
-    red: '#cf222e',
-    green: '#116329',
-    yellow: '#4d2d00',
-    blue: '#0969da',
-    magenta: '#8250df',
-    cyan: '#1b7c83',
-    white: '#6e7781',
-    brightBlack: '#57606a',
-    brightRed: '#a40e26',
-    brightGreen: '#1a7f37',
-    brightYellow: '#633c01',
-    brightBlue: '#218bff',
-    brightMagenta: '#a475f9',
-    brightCyan: '#3192aa',
-    brightWhite: '#8c959f'
-  }
-}
-paperSoft.darkColors = { ...paperSoft.colors }
-paperSoft.darkTerminal = { ...paperSoft.terminal }
-
-const THEMES = [charizardDesk, graphiteSoft, paperSoft]
+const THEMES = [charizardDesk]
 
 // ── 文字渲染增强（对齐终端的 font-thicken = true）──────────────────────────────
 // Chromium 在 macOS 上按 -webkit-font-smoothing: antialiased 画字：笔画偏细，
