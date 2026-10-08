@@ -2,7 +2,7 @@
  * 火山炭焰 Charizard — Hermes Desktop 桌面主题包（桌面专属，不影响 CLI/TUI 的 skin）
  *
  * 一套主题、明暗两档（设置 → 外观 切 浅色/深色/跟随系统；Shift+X 一键互切）：
- *   - 亮色档「暖纸昼」（浅色模式画 colors）：暖纸底 + 浓咖墨 + 焦琥珀 —— 白天的阅读版
+ *   - 亮色档「霜白琥珀」（浅色模式画 colors）：冷白底 + 炭墨 + 深琥珀 —— Swiss 极简（ui-ux-pro-max 方法论）
  *   - 暗色档「火山炭焰」（深色模式画 darkColors）：与终端 1:1 同色（#282c34 底 + 奶油白 #FFF0D4 + 琥珀橙 #F29C38）
  *
  * ⚠️ 表面色都是"反推值"：桌面端不会照抄主题里的 background/card/popover/userBubble，
@@ -16,58 +16,62 @@
 
 import { THEMES_AREA, PALETTE_AREA, host, requestTheme } from '@hermes/plugin-sdk'
 
-// ── 亮色档「暖纸昼」（浅色模式画 colors）────────────────────────────────────
-// 暗档的白天化身：同一色族 —— 纸/墨反转（炭底↔暖纸、奶油字↔咖啡墨）、琥珀加深成焦糖。
+// ── 亮色档「霜白琥珀」（浅色模式画 colors）──────────────────────────────────
+// 设计方法论（ui-ux-pro-max 设计库）：
+//   · 风格 = Minimalism & Swiss（极简/高对比/无多余装饰 —— 数据库对 chat/笔记/开发工具品类的推荐）
+//   · 中性体系 = 开发者工具/生产力产品线同款冷灰蓝（面 #f8fafc / 线 #e2e8f0 / 次文 #475569）
+//   · charizard 琥珀加深为主强调（按对比度规则取 #b45309）
+// 与暗档同源：深档的炭色 #272a34 收作浅档的墨色，纸/墨反转、火色加深 —— 冷白基底。
 // 表面色按亮色混色公式反推，注释里的「渲染后」才是最终看到的颜色。
 const dayColors = {
-  background: '#f4eedf',        // 反推值：渲染后 = #f4eee1（暖纸底；chrome 与侧栏同纸）
-  foreground: '#302820',        // 浓咖墨：对比 12.5:1（暗档奶油白的反转位）
-  card: '#f7eac5',              // 反推值：渲染后 = #fbf8f0（卡片/编辑器浮纸，比窗底更白）
-  cardForeground: '#302820',
-  muted: '#ece4d1',             // 悬停/浅填充底（直接渲染）
-  mutedForeground: '#6f6146',   // 暖灰褐 5.2:1
-  popover: '#fff8e7',           // 反推值：渲染后 = #fdfbf6（弹层最亮）
-  popoverForeground: '#302820',
-  primary: '#9e520e',           // 焦琥珀（= 暗档 #ffaf5f 的昼间加深版）：chrome 上 4.95:1
-  primaryForeground: '#fdf4e6',
-  secondary: '#e9d9b6',         // 沙金填充（标签/选中底）
-  secondaryForeground: '#684912',
-  accent: '#e9d9b6',
-  accentForeground: '#684912',
-  border: '#d8cbac',            // 暖棕发丝线
-  input: '#fbf8f0',
-  ring: '#9e520e',
-  midground: '#9e520e',
-  midgroundForeground: '#fdf4e6',
-  composerRing: '#9e520e',
-  destructive: '#b23a2e',
-  destructiveForeground: '#fdf3e8',
-  sidebarBackground: '#f4eee1', // 纯色渲染 → 与 chrome 一致（整窗同纸）
-  sidebarBorder: '#d8cbac',
-  userBubble: '#f0e5cd',        // 注：亮档气泡配方 = 0% 种子 + 100% #fcfcfc → 实画固定 #fcfcfc，此值仅兜底
-  userBubbleBorder: '#bf7a2a'
+  background: '#f8fbfd',        // 反推值：渲染后 = #f8fafc（冷白底；chrome 与侧栏同色）
+  foreground: '#272a34',        // 炭墨（= 深档的底色）：对比 13.7:1
+  card: '#fcfcfc',              // 反推值：渲染后 = #fcfcfc（卡片/编辑器近白浮层）
+  cardForeground: '#272a34',
+  muted: '#f1f5f9',             // 悬停/浅填充底（直接渲染）
+  mutedForeground: '#475569',   // 冷灰蓝 7.2:1（= 设计库中性系统原文）
+  popover: '#ffffff',           // 反推值：渲染后 = #fdfdfd（弹层最亮，配方上限）
+  popoverForeground: '#272a34',
+  primary: '#b45309',           // 深琥珀（= 暗档 #ffaf5f 的昼间加深版）：chrome 上 4.8:1
+  primaryForeground: '#fffdf8',
+  secondary: '#e8edf4',         // 冷灰蓝填充（标签/选中底）
+  secondaryForeground: '#9c4f08',
+  accent: '#e8edf4',
+  accentForeground: '#9c4f08',
+  border: '#e2e8f0',            // 冷发丝线（= 设计库原文）
+  input: '#fcfcfc',
+  ring: '#b45309',
+  midground: '#b45309',
+  midgroundForeground: '#fffdf8',
+  composerRing: '#b45309',
+  destructive: '#c0392b',
+  destructiveForeground: '#fff7f3',
+  sidebarBackground: '#f8fafc', // 纯色渲染 → 与 chrome 一致
+  sidebarBorder: '#e2e8f0',
+  userBubble: '#edf1f6',        // 注：亮档气泡配方 = 0% 种子 + 100% #fcfcfc → 实画固定 #fcfcfc，此值仅兜底
+  userBubbleBorder: '#c1731d'   // 琥珀描边（呼应暗档的 #c75b1d）
 }
 
-// 亮色档的内置终端 ANSI（浅底版：色相不变、整体加深到可读）
+// 亮色档的内置终端 ANSI（浅底版：中性槽位转冷，彩色槽位加深到可读）
 const dayTerminal = {
-  foreground: '#372e21',
-  cursor: '#c26a14',
-  black: '#3a2c1e',
+  foreground: '#272a34',
+  cursor: '#b45309',
+  black: '#343a46',
   red: '#c0392b',
   green: '#558b2f',
   yellow: '#9c7a0e',
   blue: '#2569c9',
   magenta: '#8c2faf',
   cyan: '#107a83',
-  white: '#7d6b50',
-  brightBlack: '#6b5b45',
+  white: '#6b7280',
+  brightBlack: '#5e6675',
   brightRed: '#d34a3a',
   brightGreen: '#6ea23a',
   brightYellow: '#b8951f',
   brightBlue: '#3d86dd',
   brightMagenta: '#a44cc7',
   brightCyan: '#1f95a0',
-  brightWhite: '#3f3428'
+  brightWhite: '#3d4554'
 }
 
 // ── 暗色档「火山炭焰」（深色模式画 darkColors）──────────────────────────────
@@ -126,7 +130,7 @@ const nightTerminal = {
 const charizardDesk = {
   name: 'charizard-desk',
   label: '火山炭焰 Charizard',
-  description: '终端同款 · 桌面专属（明暗双档：夜 #282c34 / 昼暖纸琥珀，随外观切换）',
+  description: '终端同款 · 桌面专属（明暗双档：夜 #282c34 炭底 / 昼霜白琥珀，随外观切换）',
   colors: dayColors,
   terminal: dayTerminal,
   darkColors: nightColors,
